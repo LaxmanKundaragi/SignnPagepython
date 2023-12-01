@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-<title>{% block title %}Home {% endblock %}</title>
+    <title>{% block title %}Home {% endblock %}</title>
 </head>
-<body>
-<nav>
 
-    <br>
-    <a href="/login" id="login">Login</a> &nbsp; 
-    <a href="/sign_up" id="sign_up">SignUp</a> &nbsp; 
-    <a href="/" id="Home">Home</a> &nbsp;
-    <a href="/logout" id="Logout">Logout</a> &nbsp; 
- 
+<body>
+    <nav>
+
+        <br>
+        <a href="/login" id="login">Login</a> &nbsp;
+        <a href="/sign_up" id="sign_up">SignUp</a> &nbsp;
+        <a href="/" id="Home">Home</a> &nbsp;
+        <a href="/logout" id="Logout">Logout</a> &nbsp;
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="{% if category == 'error' %}error{% else %}info{% endif %}"style='align:center'>
+                {{ message }}
+                <button type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
 {% block content %}
 {% endblock %}
-</nav>
+
+
+
 
 
 
@@ -29,4 +45,5 @@
     </script>
 
 </body>
+
 </html>
